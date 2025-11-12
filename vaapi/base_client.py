@@ -23,6 +23,7 @@ from .motion_frame.client import MotionFrameClient
 from .cognition_frame.client import CognitionFrameClient
 from .video.client import VideoClient
 from .teams.client import TeamClient
+from .robots.client import RobotClient
 
 cognition_representation_list = [
     "AudioData",
@@ -148,6 +149,7 @@ class VaapiBase:
         self.frame_filter = FrameFilterClient(client_wrapper=self._client_wrapper)
         self.experiment = ExperimentClient(client_wrapper=self._client_wrapper)
         self.team = TeamClient(client_wrapper=self._client_wrapper)
+        self.robot = RobotClient(client_wrapper=self._client_wrapper)
 
         # dynamically create client members
         for attr_name in cognition_representation_list:
