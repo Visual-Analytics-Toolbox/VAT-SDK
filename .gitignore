@@ -6,3 +6,4 @@ dist/
 venv/
 .pypirc
 __pycache__/
+.envrc
