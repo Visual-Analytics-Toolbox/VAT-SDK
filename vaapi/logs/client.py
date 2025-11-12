@@ -97,6 +97,7 @@ class LogClient:
         *,
         game: typing.Optional[str] = OMIT,
         experiment: typing.Optional[str] = OMIT,
+        robot: typing.Optional[int] = OMIT,
         robot_version: typing.Optional[str] = OMIT,
         player_number: typing.Optional[dt.date] = OMIT,
         head_number: typing.Optional[str] = OMIT,
@@ -117,6 +118,7 @@ class LogClient:
             json={
                 "game": game,
                 "experiment": experiment,
+                "robot": robot,
                 "robot_version": robot_version,
                 "player_number": player_number,
                 "head_number": head_number,
@@ -206,6 +208,7 @@ class LogClient:
         *,
         game: typing.Optional[str] = OMIT,
         experiment: typing.Optional[str] = OMIT,
+        robot: typing.Optional[int] = OMIT,
         robot_version: typing.Optional[str] = OMIT,
         player_number: typing.Optional[dt.date] = OMIT,
         head_number: typing.Optional[str] = OMIT,
@@ -226,6 +229,7 @@ class LogClient:
             json={
                 "game": game,
                 "experiment": experiment,
+                "robot": robot,
                 "robot_version": robot_version,
                 "player_number": player_number,
                 "head_number": head_number,

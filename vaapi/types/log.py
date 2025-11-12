@@ -15,6 +15,7 @@ class Log(pydantic_v1.BaseModel):
     # Foreign key to the experiment this log is from
     experiment: typing.Optional[int] = None
 
+    robot: typing.Optional[int] = None
     #: Robot Version, either v5 or v6
     robot_version: typing.Optional[str] = None
 
