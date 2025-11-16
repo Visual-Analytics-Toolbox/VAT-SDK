@@ -30,7 +30,7 @@ class ImageClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/image/{jsonable_encoder(id)}/",
+            f"api/images/{jsonable_encoder(id)}/",
             method="GET",
             request_options=request_options,
         )
@@ -78,7 +78,7 @@ class ImageClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/image/{jsonable_encoder(id)}/",
+            f"api/images/{jsonable_encoder(id)}/",
             method="DELETE",
             request_options=request_options,
         )
@@ -181,7 +181,7 @@ class ImageClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/image/{jsonable_encoder(id)}/",
+            f"api/images/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
                 "log": log,
@@ -242,7 +242,7 @@ class ImageClient:
         query_params['limit'] = limit
         query_params['offset'] = offset
         _response = self._client_wrapper.httpx_client.request(
-            "api/image/",
+            "api/images/",
             method="GET",
             request_options=request_options,
             params=query_params,
@@ -365,7 +365,7 @@ class ImageClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "api/image/",
+            "api/images/",
             method="POST",
             json={
                 "camera": camera,
@@ -401,7 +401,7 @@ class ImageClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "api/image/",
+            "api/images/",
             method="POST",
             json=data_list,
             request_options=request_options,
