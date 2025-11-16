@@ -6,8 +6,8 @@ from ..core.client_wrapper import SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import pydantic_v1
 from ..core.request_options import RequestOptions
-from ..types.image import Image
-
+from ..core.pagination import SyncPager
+from ..types.image import Image,ImageOffsetPagination
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
@@ -206,9 +206,11 @@ class ImageClient:
 
     def list(
         self,
+        offset: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
         request_options: typing.Optional[RequestOptions] = None,
         **filters: typing.Any,
-    ) -> typing.List[Image]:
+    ) -> SyncPager[Image]:
         """
         List all Image with optional filters applied.
 
@@ -234,7 +236,11 @@ class ImageClient:
             log=1,
         )
         """
+        offset = offset if offset is not None else 0
+        limit = limit if limit is not None else 100
         query_params = {k: v for k, v in filters.items()}
+        query_params['limit'] = limit
+        query_params['offset'] = offset
         _response = self._client_wrapper.httpx_client.request(
             "api/image/",
             method="GET",
@@ -243,7 +249,19 @@ class ImageClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(typing.List[Image], _response.json())  # type: ignore
+                _parsed_response = pydantic_v1.parse_obj_as(ImageOffsetPagination,_response.json())
+
+                _has_next = _parsed_response.next != None
+
+                _get_next = lambda: self.list(
+                    offset=offset + limit,  # Increase offset by limit to get the next page
+                    limit=limit,
+                    request_options=request_options,
+                    **filters
+                ) if _has_next else None
+                
+                _items = _parsed_response.results
+                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next,count=_parsed_response.count)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -255,7 +273,7 @@ class ImageClient:
         log_id: typing.Optional[int] = OMIT,
         camera: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
-        frame_number: typing.Optional[int] = OMIT,
+        frame: typing.Optional[int] = OMIT,
         image_url: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Image:
@@ -354,7 +372,7 @@ class ImageClient:
                 "log_id": log_id,
                 "camera": camera,
                 "type": type,
-                "frame_number": frame_number,
+                "frame": frame,
                 "image_url": image_url,
             },
             request_options=request_options,
