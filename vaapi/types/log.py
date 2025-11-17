@@ -3,7 +3,7 @@ import typing
 
 from ..core.datetime_utils import serialize_datetime
 from ..core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
-
+from .robots import Robot
 
 class Log(pydantic_v1.BaseModel):
     #: Id assigned by django
@@ -15,17 +15,11 @@ class Log(pydantic_v1.BaseModel):
     # Foreign key to the experiment this log is from
     experiment: typing.Optional[int] = None
 
-    robot: typing.Optional[int] = None
-    #: Robot Version, either v5 or v6
-    robot_version: typing.Optional[str] = None
+    robot: typing.Optional[Robot] = None
+    robot_id_on_write: typing.Optional[int] = None
 
     player_number: typing.Optional[int] = None
 
-    head_number: typing.Optional[str] = pydantic_v1.Field(default=None)
-
-    body_serial: typing.Optional[str] = pydantic_v1.Field(default=None)
-
-    head_serial: typing.Optional[str] = pydantic_v1.Field(default=None)
 
     representation_list: typing.Optional[typing.Dict[str, typing.Any]] = (
         pydantic_v1.Field(default=None)
@@ -40,6 +34,23 @@ class Log(pydantic_v1.BaseModel):
     git_commit: typing.Optional[str] = pydantic_v1.Field(default=None)
 
     is_favourite: typing.Optional[bool] = pydantic_v1.Field(default=None)
+
+    @pydantic_v1.root_validator(pre=True)
+    def handle_read_write_difference(cls, values):
+        robot_data = values.get('robot')
+        
+        # If it's a dict, it's a READ response, let Pydantic validate against CognitionFrame
+        if isinstance(robot_data, dict):
+
+            return values
+        
+        # If it's an int, it's a WRITE input, set the ID field and remove the 'frame' key
+        # so it doesn't try to parse an int as a CognitionFrame object.
+        elif isinstance(robot_data, int):
+            values['robot_id_on_write'] = robot_data
+            del values['robot'] 
+        
+        return values
 
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {
