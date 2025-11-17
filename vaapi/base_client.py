@@ -24,6 +24,8 @@ from .cognition_frame.client import CognitionFrameClient
 from .video.client import VideoClient
 from .teams.client import TeamClient
 from .robots.client import RobotClient
+from .dataset.client import DatasetClient
+from .model.client import ModelClient
 
 cognition_representation_list = [
     "AudioData",
@@ -150,6 +152,8 @@ class VaapiBase:
         self.experiment = ExperimentClient(client_wrapper=self._client_wrapper)
         self.team = TeamClient(client_wrapper=self._client_wrapper)
         self.robot = RobotClient(client_wrapper=self._client_wrapper)
+        self.dataset = DatasetClient(client_wrapper=self._client_wrapper)
+        self.model = ModelClient(client_wrapper=self._client_wrapper)
 
         # dynamically create client members
         for attr_name in cognition_representation_list:
