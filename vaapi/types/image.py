@@ -28,6 +28,10 @@ class Image(pydantic_v1.BaseModel):
     #: blurredness_value
     blurredness_value: typing.Optional[int] = pydantic_v1.Field(default=None)
 
+    brightness_value: typing.Optional[int] = pydantic_v1.Field(default=None)
+
+    labelstudio_url: typing.Optional[str] = pydantic_v1.Field(default=None)
+
     @pydantic_v1.root_validator(pre=True)
     def handle_read_write_difference(cls, values):
         frame_data = values.get('frame')
