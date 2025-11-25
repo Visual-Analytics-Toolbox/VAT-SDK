@@ -102,6 +102,7 @@ class ImageClient:
         blurredness_value: typing.Optional[int] = OMIT,
         brightness_value: typing.Optional[int] = OMIT,
         labelstudio_url: typing.Optional[str] = OMIT,
+        validated: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Image:
         """
@@ -192,6 +193,7 @@ class ImageClient:
                 "blurredness_value": blurredness_value,
                 "brightness_value": brightness_value,
                 "labelstudio_url": labelstudio_url,
+                "validated": validated,
             },
             request_options=request_options,
             omit=OMIT,
@@ -277,6 +279,7 @@ class ImageClient:
         blurredness_value: typing.Optional[int] = OMIT,
         brightness_value: typing.Optional[int] = OMIT,
         labelstudio_url: typing.Optional[str] = OMIT,
+        validated: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Image:
         """
@@ -378,6 +381,7 @@ class ImageClient:
                 "blurredness_value": blurredness_value,
                 "brightness_value": brightness_value,
                 "labelstudio_url": labelstudio_url,
+                "validated": validated,
             },
             request_options=request_options,
             omit=OMIT,
