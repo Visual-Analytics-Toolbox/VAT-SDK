@@ -96,6 +96,7 @@ class ExperimentClient:
         *,
         event_id: typing.Optional[int] = OMIT,
         name: typing.Optional[str] = OMIT,
+        type: typing.Optional[str] = OMIT,
         field: typing.Optional[str] = OMIT,
         comment: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -107,6 +108,7 @@ class ExperimentClient:
             json={
                 "event_id": event_id,
                 "name": name,
+                "type": type,
                 "field": field,
                 "comment": comment,
             },
@@ -174,6 +176,7 @@ class ExperimentClient:
         *,
         event_id: typing.Optional[int] = OMIT,
         name: typing.Optional[str] = OMIT,
+        type: typing.Optional[str] = OMIT,
         field: typing.Optional[str] = OMIT,
         comment: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -185,6 +188,7 @@ class ExperimentClient:
             json={
                 "event_id": event_id,
                 "name": name,
+                "type": type,
                 "field": field,
                 "comment": comment,
             },

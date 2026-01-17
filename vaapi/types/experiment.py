@@ -9,13 +9,10 @@ class Experiment(pydantic_v1.BaseModel):
     #: Id assigned by django
     id: typing.Optional[int] = None
 
-    #: Foreign key to the event this game belongs to.
+    # Foreign key to the event this experiment belongs to.
     event_id: typing.Optional[int] = pydantic_v1.Field(default=None)
-
-    #: team1
+    type: typing.Optional[str] = None
     name: typing.Optional[str] = None
-
-    #: field
     field: typing.Optional[str] = pydantic_v1.Field(default=None)
 
     #: comment
