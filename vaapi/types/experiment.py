@@ -14,6 +14,7 @@ class Experiment(pydantic_v1.BaseModel):
     type: typing.Optional[str] = None
     name: typing.Optional[str] = None
     field: typing.Optional[str] = pydantic_v1.Field(default=None)
+    experiment_folder: typing.Optional[str] = None
 
     #: comment
     comment: typing.Optional[str] = pydantic_v1.Field(default=None)

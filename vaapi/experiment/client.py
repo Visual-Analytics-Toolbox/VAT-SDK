@@ -99,6 +99,7 @@ class ExperimentClient:
         type: typing.Optional[str] = OMIT,
         field: typing.Optional[str] = OMIT,
         comment: typing.Optional[str] = OMIT,
+        experiment_folder: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Experiment:
         """ """
@@ -111,6 +112,7 @@ class ExperimentClient:
                 "type": type,
                 "field": field,
                 "comment": comment,
+                "experiment_folder": experiment_folder,
             },
             request_options=request_options,
             omit=OMIT,
@@ -179,6 +181,7 @@ class ExperimentClient:
         type: typing.Optional[str] = OMIT,
         field: typing.Optional[str] = OMIT,
         comment: typing.Optional[str] = OMIT,
+        experiment_folder: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Experiment:
         """ """
@@ -191,6 +194,7 @@ class ExperimentClient:
                 "type": type,
                 "field": field,
                 "comment": comment,
+                "experiment_folder": experiment_folder
             },
             request_options=request_options,
             omit=OMIT,
