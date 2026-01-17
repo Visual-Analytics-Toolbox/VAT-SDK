@@ -10,7 +10,7 @@ class Experiment(pydantic_v1.BaseModel):
     id: typing.Optional[int] = None
 
     # Foreign key to the event this experiment belongs to.
-    event_id: typing.Optional[int] = pydantic_v1.Field(default=None)
+    event: typing.Optional[int] = pydantic_v1.Field(default=None)
     type: typing.Optional[str] = None
     name: typing.Optional[str] = None
     field: typing.Optional[str] = pydantic_v1.Field(default=None)

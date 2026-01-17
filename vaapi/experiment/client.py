@@ -94,7 +94,7 @@ class ExperimentClient:
         self,
         id: int,
         *,
-        event_id: typing.Optional[int] = OMIT,
+        event: typing.Optional[int] = OMIT,
         name: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
         field: typing.Optional[str] = OMIT,
@@ -106,7 +106,7 @@ class ExperimentClient:
             f"api/experiments/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
-                "event_id": event_id,
+                "event": event,
                 "name": name,
                 "type": type,
                 "field": field,
@@ -124,7 +124,7 @@ class ExperimentClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def list(
-        self, event_id: int, *, request_options: typing.Optional[RequestOptions] = None
+        self, event: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[Experiment]:
         """
         List all experiments.
@@ -157,7 +157,7 @@ class ExperimentClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/experiments/?event={jsonable_encoder(event_id)}",
+            f"api/experiments/?event={jsonable_encoder(event)}",
             method="GET",
             request_options=request_options,
         )
@@ -174,7 +174,7 @@ class ExperimentClient:
     def create(
         self,
         *,
-        event_id: typing.Optional[int] = OMIT,
+        event: typing.Optional[int] = OMIT,
         name: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
         field: typing.Optional[str] = OMIT,
@@ -186,7 +186,7 @@ class ExperimentClient:
             "api/experiments/",
             method="POST",
             json={
-                "event_id": event_id,
+                "event": event,
                 "name": name,
                 "type": type,
                 "field": field,
