@@ -126,7 +126,9 @@ class ExperimentClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def list(
-        self, event: int, *, request_options: typing.Optional[RequestOptions] = None
+        self, 
+        request_options: typing.Optional[RequestOptions] = None,
+        **filters: typing.Any,
     ) -> typing.List[Experiment]:
         """
         List all experiments.
@@ -158,10 +160,12 @@ class ExperimentClient:
             id=1,
         )
         """
+        query_params = {k: v for k, v in filters.items()}
         _response = self._client_wrapper.httpx_client.request(
-            f"api/experiments/?event={jsonable_encoder(event)}",
+            f"api/experiments/",
             method="GET",
             request_options=request_options,
+            params=query_params,
         )
         try:
             if 200 <= _response.status_code < 300:
