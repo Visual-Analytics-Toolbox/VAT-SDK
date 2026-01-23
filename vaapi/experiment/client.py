@@ -203,7 +203,6 @@ class ExperimentClient:
             request_options=request_options,
             omit=OMIT,
         )
-        print(_response.json())
         try:
             if 200 <= _response.status_code < 300:
                 return pydantic_v1.parse_obj_as(Experiment, _response.json())  # type: ignore
