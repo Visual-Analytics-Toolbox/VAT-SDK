@@ -20,9 +20,7 @@ class Game(pydantic_v1.BaseModel):
 
     is_testgame: typing.Optional[bool] = pydantic_v1.Field(default=None)
 
-    head_ref: typing.Optional[str] = pydantic_v1.Field(default=None)
-
-    assistent_ref: typing.Optional[str] = pydantic_v1.Field(default=None)
+    referees: typing.Optional[str] = pydantic_v1.Field(default=None)
 
     field: typing.Optional[str] = pydantic_v1.Field(default=None)
 
