@@ -25,7 +25,7 @@ class MaximumScan:
 
         return False
 
-img = np.asarray(Image.open('test.png'))
+img = np.asarray(Image.open('ScanLines/edge.png'))
 
 first_channel = img[:,:,0]
 
@@ -40,17 +40,19 @@ class Edgel():
 
 edgels = []
 
+step_size = 1
+
 for x in range(0,first_channel.shape[1],30):
     begin_found = False
-    pos_scan = MaximumScan(20)
-    neg_scan = MaximumScan(20)
+    pos_scan = MaximumScan(32)
+    neg_scan = MaximumScan(32)
     last_pixel_val = first_channel[first_channel.shape[0]-1,x]
-    for y in range(first_channel.shape[0]-2,0,-1):
+    for y in range(first_channel.shape[0]-4,0,-step_size):
             
-            if y <= 2:
+            if y <= step_size:
                 continue
             
-            if y + 2 >= first_channel.shape[0]:
+            if y + step_size >= first_channel.shape[0]:
                 continue 
 
             curr_pixel_val = first_channel[y,x]
