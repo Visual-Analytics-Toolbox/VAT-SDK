@@ -11,6 +11,8 @@ class Event(pydantic_v1.BaseModel):
 
     name: typing.Optional[str] = pydantic_v1.Field(default=None)
 
+    is_testevent: typing.Optional[bool] = pydantic_v1.Field(default=None)
+
     # First Setup Day
     start_day: typing.Optional[dt.date] = None
 
