@@ -443,7 +443,13 @@ class ImageClient:
         """
 
         if data is not OMIT:
-            payload = [item.dict() for item in data]
+            payload = []
+            for item in data:
+                item_d = item.dict()
+                if "frame" in item_d.keys():
+                    item_d["frame_id"] = item_d["frame"]
+                    del item_d["frame"]
+                payload.append(item_d)
         else:
             payload = OMIT
 
