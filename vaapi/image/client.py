@@ -441,10 +441,16 @@ class ImageClient:
             api_key="YOUR_API_KEY",
         )
         """
+
+        if data is not OMIT:
+            payload = [item.dict() for item in data]
+        else:
+            payload = OMIT
+
         _response = self._client_wrapper.httpx_client.request(
             "api/image/update/",
             method="PATCH",
-            json=data,
+            json=payload,
             request_options=request_options,
             omit=OMIT,
         )

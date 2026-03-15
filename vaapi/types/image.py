@@ -71,10 +71,14 @@ class Image(pydantic_v1.BaseModel):
             **kwargs,
         }
 
-        return deep_union_pydantic_dicts(
+        result =  deep_union_pydantic_dicts(
             super().dict(**kwargs_with_defaults_exclude_unset),
             super().dict(**kwargs_with_defaults_exclude_none),
         )
+    
+        if self.frame_id_on_write is not None:
+            result['frame'] = self.frame_id_on_write
+        return result
 
     class Config:
         frozen = True
