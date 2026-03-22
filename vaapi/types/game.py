@@ -32,6 +32,10 @@ class Game(pydantic_v1.BaseModel):
 
     comment: typing.Optional[str] = pydantic_v1.Field(default=None)
 
+    game_type: typing.Optional[str] = pydantic_v1.Field(default=None)
+
+    division: typing.Optional[str] = pydantic_v1.Field(default=None)
+
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {
             "by_alias": True,
