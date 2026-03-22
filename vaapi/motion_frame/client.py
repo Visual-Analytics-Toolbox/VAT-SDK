@@ -47,24 +47,6 @@ class MotionFrameClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
-        Deletes a Motion Frame.
-
-        <Warning>This action can't be undone!</Warning>
-
-        You will need to supply the logs's unique ID. You can find the ID in
-        the django admin panel or in the log settings in the UI.
-        Parameters
-        ----------
-        id : int
-            A unique integer value identifying this annotation.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
         Examples
         --------
         from vaapi.client import Vaapi
@@ -100,7 +82,16 @@ class MotionFrameClient:
         closest_cognition_frame: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> MotionFrame:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             f"api/motionframe/{jsonable_encoder(id)}/",
             method="PATCH",
@@ -126,7 +117,16 @@ class MotionFrameClient:
         request_options: typing.Optional[RequestOptions] = None,
         **filters: typing.Any,
     ) -> typing.List[MotionFrame]:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
             "api/motionframe/",
@@ -153,7 +153,16 @@ class MotionFrameClient:
         closest_cognition_frame: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> MotionFrame:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             "api/motionframe/",
             method="POST",
@@ -211,6 +220,16 @@ class MotionFrameClient:
         data: typing.List[MotionFrame] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> MotionFrame:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             "api/motionframe/update/",
             method="PATCH",
@@ -232,6 +251,8 @@ class MotionFrameClient:
         **filters: typing.Any,
     ) -> typing.Optional[int]:
         """
+        Examples
+        --------
         from vaapi.client import Vaapi
 
         client = Vaapi(

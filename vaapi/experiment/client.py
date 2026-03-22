@@ -47,24 +47,6 @@ class ExperimentClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
-        Delete a Log., this will also delete all images and representations
-
-        <Warning>This action can't be undone!</Warning>
-
-        You will need to supply the logs's unique ID. You can find the ID in
-        the django admin panel or in the log settings in the UI.
-        Parameters
-        ----------
-        id : int
-            A unique integer value identifying this annotation.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
         Examples
         --------
         from vaapi.client import Vaapi
@@ -72,9 +54,6 @@ class ExperimentClient:
         client = Vaapi(
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
-        )
-        client.annotations.delete(
-            id=1,
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -102,7 +81,16 @@ class ExperimentClient:
         experiment_folder: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Experiment:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             f"api/experiments/{jsonable_encoder(id)}/",
             method="PATCH",
@@ -131,23 +119,6 @@ class ExperimentClient:
         **filters: typing.Any,
     ) -> typing.List[Experiment]:
         """
-        List all experiments.
-
-        You will need to supply the event ID. You can find this in ...
-
-        Parameters
-        ----------
-        event_id : int
-            Event ID
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.List[Log]
-            Log
-
         Examples
         --------
         from vaapi.client import Vaapi
@@ -155,9 +126,6 @@ class ExperimentClient:
         client = Vaapi(
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
-        )
-        client.annotations.list(
-            id=1,
         )
         """
         query_params = {k: v for k, v in filters.items()}
@@ -188,7 +156,16 @@ class ExperimentClient:
         experiment_folder: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Experiment:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             "api/experiments/",
             method="POST",

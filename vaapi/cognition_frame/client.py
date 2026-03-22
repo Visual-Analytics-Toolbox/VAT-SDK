@@ -47,24 +47,6 @@ class CognitionFrameClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
-        Deletes a Cognition Frame.
-
-        <Warning>This action can't be undone!</Warning>
-
-        You will need to supply the logs's unique ID. You can find the ID in
-        the django admin panel or in the log settings in the UI.
-        Parameters
-        ----------
-        id : int
-            A unique integer value identifying this annotation.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
         Examples
         --------
         from vaapi.client import Vaapi
@@ -100,7 +82,19 @@ class CognitionFrameClient:
         closest_motion_frame: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CognitionFrame:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        client.cognitionframe.update(
+            id=1,
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             f"api/cognitionframe/{jsonable_encoder(id)}/",
             method="PATCH",
@@ -126,7 +120,19 @@ class CognitionFrameClient:
         request_options: typing.Optional[RequestOptions] = None,
         **filters: typing.Any,
     ) -> typing.List[CognitionFrame]:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        client.cognitionframe.list(
+            id=1,
+        )
+        """
         query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
             "api/cognitionframe/",
@@ -153,7 +159,19 @@ class CognitionFrameClient:
         closest_motion_frame: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CognitionFrame:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        client.cognitionframe.create(
+            id=1,
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             "api/cognitionframe/",
             method="POST",
@@ -189,6 +207,9 @@ class CognitionFrameClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.cognitionframe.bulk_create(
+            id=1,
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             "api/cognitionframe/",
@@ -211,6 +232,19 @@ class CognitionFrameClient:
         data: typing.List[CognitionFrame] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CognitionFrame:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        client.cognitionframe.bulk_update(
+            id=1,
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             "api/cognitionframe/update/",
             method="PATCH",
@@ -232,6 +266,8 @@ class CognitionFrameClient:
         **filters: typing.Any,
     ) -> typing.Optional[int]:
         """
+        Examples
+        --------
         from vaapi.client import Vaapi
 
         client = Vaapi(

@@ -48,24 +48,6 @@ class GameClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
-        Delete a Log., this will also delete all images and representations
-
-        <Warning>This action can't be undone!</Warning>
-
-        You will need to supply the logs's unique ID. You can find the ID in
-        the django admin panel or in the log settings in the UI.
-        Parameters
-        ----------
-        id : int
-            A unique integer value identifying this annotation.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
         Examples
         --------
         from vaapi.client import Vaapi
@@ -73,9 +55,6 @@ class GameClient:
         client = Vaapi(
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
-        )
-        client.annotations.delete(
-            id=1,
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -110,7 +89,16 @@ class GameClient:
         division: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Game:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             f"api/games/{jsonable_encoder(id)}/",
             method="PATCH",
@@ -146,7 +134,16 @@ class GameClient:
         request_options: typing.Optional[RequestOptions] = None,
         **filters: typing.Any,
     ) -> typing.List[Game]:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
             "api/games/",
@@ -180,7 +177,16 @@ class GameClient:
         division: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Game:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             "api/games/",
             method="POST",

@@ -48,10 +48,6 @@ class EventsClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
-        Delete an event.
-
-        <Warning>This action can't be undone!</Warning>
-
         You will need to supply the events's unique ID. You can find the ID in
         the django admin panel or in the events settings in the UI.
         Parameters
@@ -114,7 +110,7 @@ class EventsClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
-        client.event.create(name="German Open 2027")
+        client.event.update(id=1, comment="We had a lot of fun")
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/events/{jsonable_encoder(id)}/",
@@ -144,23 +140,6 @@ class EventsClient:
         self, *, request_options: typing.Optional[RequestOptions] = None
     ) -> typing.List[Event]:
         """
-        List all annotations for a task.
-
-        You will need to supply the task ID. You can find this in Label Studio by opening a task and checking the URL. It is also listed at the top of the labeling interface. Or you can use [Get tasks list](../tasks/list).
-
-        Parameters
-        ----------
-        id : int
-            Task ID
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.List[Annotation]
-            Annotation
-
         Examples
         --------
         from vaapi.client import Vaapi
@@ -169,9 +148,7 @@ class EventsClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
-        client.annotations.list(
-            id=1,
-        )
+        client.event.list()
         """
         _response = self._client_wrapper.httpx_client.request(
             "api/events/", method="GET", request_options=request_options
@@ -206,6 +183,7 @@ class EventsClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.event.create(name="RoboCup 2026)
         """
         _response = self._client_wrapper.httpx_client.request(
             "api/events/",
@@ -246,6 +224,10 @@ class EventsClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+
+        client.event.bulk_create([
+            {name="RoboCup 2026},{name="RoboCup 2027}
+            ])
         """
         _response = self._client_wrapper.httpx_client.request(
             "api/events/",

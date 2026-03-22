@@ -50,24 +50,6 @@ class CognitionRepresentationClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
-        Delete a Motion Representation.
-
-        <Warning>This action can't be undone!</Warning>
-
-        You will need to supply the logs's unique ID. You can find the ID in
-        the django admin panel or in the log settings in the UI.
-        Parameters
-        ----------
-        id : int
-            A unique integer value identifying this annotation.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
         Examples
         --------
         from vaapi.client import Vaapi
@@ -75,9 +57,6 @@ class CognitionRepresentationClient:
         client = Vaapi(
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
-        )
-        client.annotations.delete(
-            id=1,
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -101,7 +80,16 @@ class CognitionRepresentationClient:
         representation_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CognitionRepresentation:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             f"api/cognition/{self.endpoint}/{jsonable_encoder(id)}/",
             method="PATCH",
@@ -130,23 +118,6 @@ class CognitionRepresentationClient:
         **filters: typing.Any,
     ) -> SyncPager[CognitionRepresentation]:
         """
-        List all logs.
-
-        You will need to supply the event ID. You can find this in ...
-
-        Parameters
-        ----------
-        log_id : int
-            Game ID
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.List[CognitionRepresentation]
-            CognitionRepresentation
-
         Examples
         --------
         from vaapi.client import Vaapi
@@ -154,9 +125,6 @@ class CognitionRepresentationClient:
         client = Vaapi(
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
-        )
-        client.annotations.list(
-            id=1,
         )
         """
         offset = offset if offset is not None else 0
@@ -265,6 +233,8 @@ class CognitionRepresentationClient:
         **filters: typing.Any,
     ) -> typing.Optional[int]:
         """
+        Examples
+        --------
         from vaapi.client import Vaapi
 
         client = Vaapi(

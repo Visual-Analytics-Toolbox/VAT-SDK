@@ -47,6 +47,16 @@ class VideoClient:
     def delete(
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             f"api/video/{jsonable_encoder(id)}/",
             method="DELETE",
@@ -72,7 +82,16 @@ class VideoClient:
         comment: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Video:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             f"api/video/{jsonable_encoder(id)}/",
             method="PATCH",
@@ -102,6 +121,16 @@ class VideoClient:
         request_options: typing.Optional[RequestOptions] = None,
         **filters: typing.Any,
     ) -> typing.List[Video]:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         query_params = {k: v for k, v in filters.items() if v is not None}
 
         _response = self._client_wrapper.httpx_client.request(
@@ -129,7 +158,16 @@ class VideoClient:
         comment: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Video:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             "api/video/",
             method="POST",
@@ -170,7 +208,6 @@ class VideoClient:
             api_key="YOUR_API_KEY",
         )
         """
-
         query_params = {
             "game": game,
             "start": start,

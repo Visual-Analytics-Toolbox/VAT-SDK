@@ -48,24 +48,6 @@ class LogClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
-        Delete a Log., this will also delete all images and representations
-
-        <Warning>This action can't be undone!</Warning>
-
-        You will need to supply the logs's unique ID. You can find the ID in
-        the django admin panel or in the log settings in the UI.
-        Parameters
-        ----------
-        id : int
-            A unique integer value identifying this annotation.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
         Examples
         --------
         from vaapi.client import Vaapi
@@ -73,9 +55,6 @@ class LogClient:
         client = Vaapi(
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
-        )
-        client.annotations.delete(
-            id=1,
         )
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -111,7 +90,16 @@ class LogClient:
         is_favourite: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Log:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             f"api/logs/{jsonable_encoder(id)}/",
             method="PATCH",
@@ -151,23 +139,6 @@ class LogClient:
     ) -> typing.List[Log]:
         # TODO: maybe we should not allow filtering for arbitrary fields - makes validation hard and also filtering for json fields is not useful/possible
         """
-        List all logs.
-
-        You will need to supply the event ID. You can find this in ...
-
-        Parameters
-        ----------
-        game_id : int
-            Game ID
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        typing.List[Log]
-            Log
-
         Examples
         --------
         from vaapi.client import Vaapi
@@ -175,9 +146,6 @@ class LogClient:
         client = Vaapi(
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
-        )
-        client.annotations.list(
-            id=1,
         )
         """
         query_params = {k: v for k, v in filters.items() if v is not None}
@@ -222,7 +190,16 @@ class LogClient:
         is_favourite: typing.Optional[bool] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Log:
-        """ """
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
         _response = self._client_wrapper.httpx_client.request(
             "api/logs/",
             method="POST",

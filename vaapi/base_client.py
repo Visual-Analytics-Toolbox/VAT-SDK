@@ -107,7 +107,7 @@ class VaapiBase:
         )
         if api_key is None:
             raise ApiError(
-                body="The client must be instantiated be either passing in api_key or setting LABEL_STUDIO_API_KEY"
+                body="The client must be instantiated be either passing in api_key"
             )
         self._client_wrapper = SyncClientWrapper(
             base_url=base_url,
