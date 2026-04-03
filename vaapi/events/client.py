@@ -137,7 +137,8 @@ class EventsClient:
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def list(
-        self, *, request_options: typing.Optional[RequestOptions] = None
+        self, *, request_options: typing.Optional[RequestOptions] = None,
+        **filters: typing.Any,
     ) -> typing.List[Event]:
         """
         Examples
@@ -150,8 +151,12 @@ class EventsClient:
         )
         client.event.list()
         """
+        query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
-            "api/events/", method="GET", request_options=request_options
+            "api/events/",
+            method="GET",
+            request_options=request_options,
+            params=query_params,
         )
         try:
             if 200 <= _response.status_code < 300:
