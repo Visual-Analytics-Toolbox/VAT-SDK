@@ -31,7 +31,7 @@ class VideoClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/video/{jsonable_encoder(id)}/",
+            f"api/videos/{jsonable_encoder(id)}/",
             method="GET",
             request_options=request_options,
         )
@@ -58,7 +58,7 @@ class VideoClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/video/{jsonable_encoder(id)}/",
+            f"api/videos/{jsonable_encoder(id)}/",
             method="DELETE",
             request_options=request_options,
         )
@@ -93,7 +93,7 @@ class VideoClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/video/{jsonable_encoder(id)}/",
+            f"api/videos/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
                 "game": game,
@@ -134,7 +134,7 @@ class VideoClient:
         query_params = {k: v for k, v in filters.items() if v is not None}
 
         _response = self._client_wrapper.httpx_client.request(
-            "api/video/",
+            "api/videos/",
             method="GET",
             request_options=request_options,
             params=query_params,
@@ -169,7 +169,7 @@ class VideoClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "api/video/",
+            "api/videos/",
             method="POST",
             json={
                 "game": game,
@@ -215,7 +215,7 @@ class VideoClient:
         }
 
         with self._client_wrapper.httpx_client.stream(
-            "api/video/slice",
+            "api/videos/slice",
             method="GET",
             request_options=request_options,
             params=query_params,

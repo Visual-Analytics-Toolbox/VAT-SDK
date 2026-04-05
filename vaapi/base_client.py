@@ -21,7 +21,7 @@ from .frame_filter.client import FrameFilterClient
 from .experiment.client import ExperimentClient
 from .motion_frame.client import MotionFrameClient
 from .cognition_frame.client import CognitionFrameClient
-from .video.client import VideoClient
+from .videos.client import VideoClient
 from .teams.client import TeamClient
 from .robots.client import RobotClient
 from .timeline.client import TimelineClient
@@ -131,7 +131,7 @@ class VaapiBase:
         self.logs = LogClient(client_wrapper=self._client_wrapper)
         self.cognitionframe = CognitionFrameClient(client_wrapper=self._client_wrapper)
         self.motionframe = MotionFrameClient(client_wrapper=self._client_wrapper)
-        self.video = VideoClient(client_wrapper=self._client_wrapper)
+        self.videos = VideoClient(client_wrapper=self._client_wrapper)
         self.behavior_option = BehaviorOptionClient(client_wrapper=self._client_wrapper)
         self.behavior_option_state = BehaviorOptionStateClient(
             client_wrapper=self._client_wrapper
