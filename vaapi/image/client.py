@@ -264,7 +264,7 @@ class ImageClient:
         if data is not OMIT:
             payload = []
             for item in data:
-                item_d = item.dict()
+                item_d = item.copy()
                 if "frame" in item_d.keys():
                     item_d["frame_id"] = item_d["frame"]
                     del item_d["frame"]
