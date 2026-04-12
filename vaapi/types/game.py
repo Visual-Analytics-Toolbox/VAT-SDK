@@ -24,7 +24,7 @@ class Game(pydantic_v1.BaseModel):
 
     field: typing.Optional[str] = pydantic_v1.Field(default=None)
 
-    start_time: typing.Optional[dt.datetime] = pydantic_v1.Field(default=None)
+    start_time: typing.Optional[str] = pydantic_v1.Field(default=None)
 
     score: typing.Optional[str] = pydantic_v1.Field(default=None)
 
