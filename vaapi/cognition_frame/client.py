@@ -136,6 +136,8 @@ class CognitionFrameClient:
             id=1,
         )
         """
+        offset = offset if offset is not None else 0
+        limit = limit if limit is not None else 100
         query_params = {k: v for k, v in filters.items() if v is not None}
         query_params['limit'] = limit
         query_params['offset'] = offset
