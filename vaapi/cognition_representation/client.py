@@ -8,6 +8,7 @@ from ..core.pydantic_utilities import pydantic_v1
 from ..core.request_options import RequestOptions
 from ..types.cognition_representation import CognitionRepresentation, CognitionOffsetPagination
 from ..core.pagination import SyncPager
+
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
