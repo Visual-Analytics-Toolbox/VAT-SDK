@@ -79,6 +79,7 @@ class VideoClient:
         video_path: typing.Optional[str] = OMIT,
         url: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
+        labelstudio_url: typing.Optional[str] = OMIT,
         comment: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Video:
@@ -101,6 +102,7 @@ class VideoClient:
                 "video_path": video_path,
                 "url": url,
                 "type": type,
+                "labelstudio_url": labelstudio_url,
                 "comment": comment,
             },
             request_options=request_options,
@@ -155,6 +157,7 @@ class VideoClient:
         video_path: typing.Optional[str] = OMIT,
         url: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
+        labelstudio_url: typing.Optional[str] = OMIT,
         comment: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Video:
@@ -177,6 +180,7 @@ class VideoClient:
                 "video_path": video_path,
                 "url": url,
                 "type": type,
+                "labelstudio_url": labelstudio_url,
                 "comment": comment,
             },
             request_options=request_options,

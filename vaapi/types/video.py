@@ -21,6 +21,8 @@ class Video(pydantic_v1.BaseModel):
 
     type: typing.Optional[str] = pydantic_v1.Field(default=None)
 
+    labelstudio_url: typing.Optional[str] = pydantic_v1.Field(default=None)
+
     comment: typing.Optional[str] = pydantic_v1.Field(default=None)
 
     def json(self, **kwargs: typing.Any) -> str:
