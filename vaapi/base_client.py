@@ -46,6 +46,7 @@ cognition_representation_list = [
     "TeamMessageDecision",
     "TeamState",
     "WhistlePercept",
+    "RobotPose",
 ]
 motion_representation_list = [
     "IMUData",
