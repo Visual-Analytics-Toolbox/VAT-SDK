@@ -78,6 +78,8 @@ class CognitionRepresentationClient:
         id: int,
         *,
         frame: typing.Optional[int] = OMIT,
+        start_pos: typing.Optional[int] = OMIT,
+        size: typing.Optional[int] = OMIT,
         representation_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CognitionRepresentation:
@@ -96,6 +98,8 @@ class CognitionRepresentationClient:
             method="PATCH",
             json={
                 "frame": frame,
+                "start_pos": start_pos,
+                "size": size,
                 "representation_data": representation_data,
             },
             request_options=request_options,
@@ -162,6 +166,8 @@ class CognitionRepresentationClient:
         self,
         *,
         frame: typing.Optional[int] = OMIT,
+        start_pos: typing.Optional[int] = OMIT,
+        size: typing.Optional[int] = OMIT,
         representation_data: typing.Optional[typing.Dict[str, typing.Any]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> CognitionRepresentation:
@@ -180,6 +186,8 @@ class CognitionRepresentationClient:
             method="POST",
             json={
                 "frame": frame,
+                "start_pos": start_pos,
+                "size": size,
                 "representation_data": representation_data,
             },
             request_options=request_options,

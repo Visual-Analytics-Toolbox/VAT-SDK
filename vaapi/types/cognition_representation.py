@@ -17,6 +17,10 @@ class CognitionRepresentation(pydantic_v1.BaseModel):
         pydantic_v1.Field(default=None)
     )
 
+    start_pos: typing.Optional[int] = pydantic_v1.Field(default=None)
+
+    size: typing.Optional[int] = pydantic_v1.Field(default=None)
+
     def json(self, **kwargs: typing.Any) -> str:
         kwargs_with_defaults: typing.Any = {
             "by_alias": True,
