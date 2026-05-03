@@ -1,5 +1,4 @@
 from vaapi.client import Vaapi
-from vaapi.types.image import Image
 import os
 
 def filter_image():
