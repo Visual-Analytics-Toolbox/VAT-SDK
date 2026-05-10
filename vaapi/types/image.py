@@ -32,7 +32,7 @@ class Image(pydantic_v1.BaseModel):
 
     labelstudio_url: typing.Optional[str] = pydantic_v1.Field(default=None)
 
-    validated: typing.Optional[bool] = pydantic_v1.Field(default=None)
+    has_annotations: typing.Optional[bool] = pydantic_v1.Field(default=None)
 
     annotation: typing.Optional[typing.List[typing.Dict]] = (
         pydantic_v1.Field(default=None)

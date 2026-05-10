@@ -81,7 +81,7 @@ class ImageClient:
         blurredness_value: typing.Optional[int] = OMIT,
         brightness_value: typing.Optional[int] = OMIT,
         labelstudio_url: typing.Optional[str] = OMIT,
-        validated: typing.Optional[bool] = OMIT,
+        has_annotations: typing.Optional[bool] = OMIT,
         annotation: typing.Optional[typing.List[typing.Dict]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Image:
@@ -107,7 +107,7 @@ class ImageClient:
                 "blurredness_value": blurredness_value,
                 "brightness_value": brightness_value,
                 "labelstudio_url": labelstudio_url,
-                "validated": validated,
+                "has_annotations": has_annotations,
                 "annotation": annotation,
             },
             request_options=request_options,
@@ -141,6 +141,7 @@ class ImageClient:
         offset = offset if offset is not None else 0
         limit = limit if limit is not None else 100
         query_params = {k: v for k, v in filters.items()}
+        print(query_params)
         query_params['limit'] = limit
         query_params['offset'] = offset
         _response = self._client_wrapper.httpx_client.request(
@@ -179,7 +180,7 @@ class ImageClient:
         blurredness_value: typing.Optional[int] = OMIT,
         brightness_value: typing.Optional[int] = OMIT,
         labelstudio_url: typing.Optional[str] = OMIT,
-        validated: typing.Optional[bool] = OMIT,
+        has_annotations: typing.Optional[bool] = OMIT,
         annotation: typing.Optional[typing.List[typing.Dict]] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Image:
@@ -204,7 +205,7 @@ class ImageClient:
                 "blurredness_value": blurredness_value,
                 "brightness_value": brightness_value,
                 "labelstudio_url": labelstudio_url,
-                "validated": validated,
+                "has_annotations": has_annotations,
                 "annotation": annotation,
             },
             request_options=request_options,
