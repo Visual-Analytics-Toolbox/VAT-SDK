@@ -34,6 +34,10 @@ class Image(pydantic_v1.BaseModel):
 
     validated: typing.Optional[bool] = pydantic_v1.Field(default=None)
 
+    annotation: typing.Optional[typing.List[typing.Dict]] = (
+        pydantic_v1.Field(default=None)
+    )
+
     @pydantic_v1.root_validator(pre=True)
     def handle_read_write_difference(cls, values):
         frame_data = values.get('frame')
