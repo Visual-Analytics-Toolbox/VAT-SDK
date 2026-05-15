@@ -308,7 +308,7 @@ class ImageClient:
         """
         query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
-            "api/image-count/",
+            "api/images/count/",
             method="GET",
             request_options=request_options,
             params=query_params,
