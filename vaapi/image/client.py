@@ -121,6 +121,48 @@ class ImageClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
+    def bulk_update(
+        self,
+        *,
+        data: typing.List[Image] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> Image:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
+        if data is not OMIT:
+            payload = []
+            for item in data:
+                item_d = item.copy()
+                if "frame" in item_d.keys():
+                    item_d["frame_id"] = item_d["frame"]
+                    del item_d["frame"]
+                payload.append(item_d)
+        else:
+            payload = OMIT
+
+        _response = self._client_wrapper.httpx_client.request(
+            "api/images",
+            method="PATCH",
+            json=payload,
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return _response.json()
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
     def list(
         self,
         offset: typing.Optional[int] = None,
@@ -249,47 +291,6 @@ class ImageClient:
             raise ApiError(status_code=_response.status_code, body=_response.text)
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
-    def bulk_update(
-        self,
-        *,
-        data: typing.List[Image] = OMIT,
-        request_options: typing.Optional[RequestOptions] = None,
-    ) -> Image:
-        """
-        Examples
-        --------
-        from vaapi.client import Vaapi
-
-        client = Vaapi(
-            base_url='https://vat.berlin-united.com/',
-            api_key="YOUR_API_KEY",
-        )
-        """
-        if data is not OMIT:
-            payload = []
-            for item in data:
-                item_d = item.copy()
-                if "frame" in item_d.keys():
-                    item_d["frame_id"] = item_d["frame"]
-                    del item_d["frame"]
-                payload.append(item_d)
-        else:
-            payload = OMIT
-
-        _response = self._client_wrapper.httpx_client.request(
-            "api/image/update/",
-            method="PATCH",
-            json=payload,
-            request_options=request_options,
-            omit=OMIT,
-        )
-        try:
-            if 200 <= _response.status_code < 300:
-                return _response.json()
-            _response_json = _response.json()
-        except JSONDecodeError:
-            raise ApiError(status_code=_response.status_code, body=_response.text)
-        raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def get_image_count(
         self,
