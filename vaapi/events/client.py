@@ -29,6 +29,9 @@ class EventsClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        my_event = client.events.get(
+            id=1,
+        )
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/events/{jsonable_encoder(id)}/",
@@ -48,20 +51,6 @@ class EventsClient:
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
     ) -> None:
         """
-        You will need to supply the events's unique ID. You can find the ID in
-        the django admin panel or in the events settings in the UI.
-        Parameters
-        ----------
-        id : int
-            A unique integer value identifying this annotation.
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
         Examples
         --------
         from vaapi.client import Vaapi
