@@ -265,7 +265,7 @@ class ImageClient:
         *,
         data_list: typing.List[Image] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> Image:
+    ) -> None:
         """
         Examples
         --------
@@ -285,7 +285,7 @@ class ImageClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return _response.json()
+                return
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)

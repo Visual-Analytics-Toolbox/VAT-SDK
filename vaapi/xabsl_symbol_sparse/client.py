@@ -342,7 +342,7 @@ class XabslSymbolClientSparse:
         *,
         data: typing.List[XabslSymbolSparse] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> XabslSymbolSparse:
+    ) -> None:
         """
         Parameters
         ----------
@@ -379,7 +379,7 @@ class XabslSymbolClientSparse:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(XabslSymbolSparse, _response.json())  # type: ignore
+                return
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)

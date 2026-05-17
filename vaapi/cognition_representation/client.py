@@ -208,7 +208,7 @@ class CognitionRepresentationClient:
         *,
         repr_list: typing.List[CognitionRepresentation] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> CognitionRepresentation:
+    ) -> None:
         """
         Examples
         --------
@@ -228,9 +228,7 @@ class CognitionRepresentationClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(
-                    CognitionRepresentation, _response.json()
-                )  # type: ignore
+                return
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)

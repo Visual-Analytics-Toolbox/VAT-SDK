@@ -145,7 +145,7 @@ class BehaviorOptionClient:
         *,
         repr_list: typing.List[BehaviorOptions] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> BehaviorOptions:
+    ) -> None:
         """
         Examples
         --------
@@ -165,7 +165,7 @@ class BehaviorOptionClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(BehaviorOptions, _response.json())  # type: ignore
+                return
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)

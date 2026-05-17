@@ -221,7 +221,7 @@ class GameClient:
         *,
         data_list: typing.List[Game] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> Game:
+    ) -> None:
         """
         Examples
         --------
@@ -241,7 +241,7 @@ class GameClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(Game, _response.json())  # type: ignore
+                return
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)

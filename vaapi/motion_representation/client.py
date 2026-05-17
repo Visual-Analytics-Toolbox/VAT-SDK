@@ -202,7 +202,7 @@ class MotionRepresentationClient:
         *,
         repr_list: typing.List[MotionRepresentation] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> MotionRepresentation:
+    ) -> None:
         """
         Examples
         --------
@@ -222,7 +222,7 @@ class MotionRepresentationClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(MotionRepresentation, _response.json())  # type: ignore
+                return
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
