@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: ['main']
+    paths:
+      - 'vaapi/__init__.py'
 env:
   PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
 
