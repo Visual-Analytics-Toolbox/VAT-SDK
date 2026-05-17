@@ -1,13 +1,13 @@
-import typing
-import datetime as dt
-from json.decoder import JSONDecodeError
-
-from ..core.api_error import ApiError
 from ..core.client_wrapper import SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import pydantic_v1
 from ..core.request_options import RequestOptions
+from json.decoder import JSONDecodeError
+from ..core.api_error import ApiError
 from ..types.game import Game
+import datetime as dt
+import typing
+
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -205,6 +205,37 @@ class GameClient:
                 "game_type": game_type,
                 "division": division,
             },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return pydantic_v1.parse_obj_as(Game, _response.json())  # type: ignore
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def bulk_create(
+        self,
+        *,
+        data_list: typing.List[Game] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> Game:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "api/games/",
+            method="POST",
+            json=data_list,
             request_options=request_options,
             omit=OMIT,
         )

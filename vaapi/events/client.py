@@ -217,7 +217,7 @@ class EventsClient:
     def bulk_create(
         self,
         *,
-        event_list: typing.List[Event] = OMIT,
+        data_list: typing.List[Event] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
     ) -> Event:
         """
@@ -237,7 +237,7 @@ class EventsClient:
         _response = self._client_wrapper.httpx_client.request(
             "api/events/",
             method="POST",
-            json=event_list,
+            json=data_list,
             request_options=request_options,
             omit=OMIT,
         )
