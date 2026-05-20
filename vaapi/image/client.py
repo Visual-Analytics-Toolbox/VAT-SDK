@@ -149,7 +149,7 @@ class ImageClient:
             payload = OMIT
 
         _response = self._client_wrapper.httpx_client.request(
-            "api/images",
+            "api/images/bulk-update",
             method="PATCH",
             json=payload,
             request_options=request_options,
