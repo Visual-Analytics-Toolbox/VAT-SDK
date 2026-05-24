@@ -31,6 +31,10 @@ class Log(pydantic_v1.BaseModel):
 
     combined_log_path: typing.Optional[str] = pydantic_v1.Field(default=None)
 
+    top_video_path: typing.Optional[str] = pydantic_v1.Field(default=None)
+
+    bottom_video_path: typing.Optional[str] = pydantic_v1.Field(default=None)
+
     git_commit: typing.Optional[str] = pydantic_v1.Field(default=None)
 
     is_favourite: typing.Optional[bool] = pydantic_v1.Field(default=None)
