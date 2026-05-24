@@ -5,7 +5,6 @@ from ..core.pydantic_utilities import pydantic_v1
 T = typing.TypeVar("T")
 
 class SyncPage(pydantic_v1.BaseModel, typing.Generic[T]):
-    count : int
     has_next: bool
     items: typing.Optional[typing.List[T]]
     get_next: typing.Optional[typing.Callable[[], typing.Optional[Self]]]

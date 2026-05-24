@@ -97,12 +97,11 @@ class Image(pydantic_v1.BaseModel):
         }
 
 
-class ImageOffsetPagination(pydantic_v1.BaseModel):
+class ImagePagination(pydantic_v1.BaseModel):
     """
-    Offset/limit paginated response for tasks
+    Cursor paginated response for tasks
     """
     results: typing.List[Image]
-    count: int
     next: typing.Any
     previous: typing.Any
     

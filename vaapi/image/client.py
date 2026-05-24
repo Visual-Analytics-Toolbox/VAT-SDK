@@ -7,7 +7,8 @@ from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import pydantic_v1
 from ..core.request_options import RequestOptions
 from ..core.pagination import SyncPager
-from ..types.image import Image,ImageOffsetPagination
+from ..types.image import Image, ImagePagination
+import urllib.parse
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
@@ -149,7 +150,7 @@ class ImageClient:
             payload = OMIT
 
         _response = self._client_wrapper.httpx_client.request(
-            "api/images/bulk-update",
+            "api/images/bulk-update/",
             method="PATCH",
             json=payload,
             request_options=request_options,
@@ -165,8 +166,8 @@ class ImageClient:
 
     def list(
         self,
-        offset: typing.Optional[int] = None,
         limit: typing.Optional[int] = None,
+        cursor: typing.Optional[str] = None,
         request_options: typing.Optional[RequestOptions] = None,
         **filters: typing.Any,
     ) -> SyncPager[Image]:
@@ -180,11 +181,17 @@ class ImageClient:
             api_key="YOUR_API_KEY",
         )
         """
-        offset = offset if offset is not None else 0
+        # 1. Safely pull cursor/offset out of filters if they were passed inside kwargs
+        cursor = cursor or filters.pop('cursor', None)
         limit = limit if limit is not None else 100
+        
+        # 2. Build our query params safely
         query_params = {k: v for k, v in filters.items()}
         query_params['limit'] = limit
-        query_params['offset'] = offset
+        
+        if cursor is not None:
+            query_params['cursor'] = cursor
+
         _response = self._client_wrapper.httpx_client.request(
             "api/images/",
             method="GET",
@@ -193,22 +200,37 @@ class ImageClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                _parsed_response = pydantic_v1.parse_obj_as(ImageOffsetPagination,_response.json())
+                _parsed_response = pydantic_v1.parse_obj_as(ImagePagination, _response.json())
 
-                _has_next = _parsed_response.next != None
+                _has_next = _parsed_response.next is not None
+                
+                # 3. Extract the next cursor from the URL provided by Django
+                next_cursor = None
+                if _has_next and _parsed_response.next:
+                    parsed_url = urllib.parse.urlparse(_parsed_response.next)
+                    url_params = urllib.parse.parse_qs(parsed_url.query)
+                    next_cursor = url_params.get('cursor', [None])[0]
 
+                # 4. Pass the cursor to the lambda instead of modifying the offset
                 _get_next = lambda: self.list(
-                    offset=offset + limit,  # Increase offset by limit to get the next page
                     limit=limit,
+                    cursor=next_cursor,  # Subsequest requests go blazing fast via cursor
                     request_options=request_options,
                     **filters
                 ) if _has_next else None
                 
                 _items = _parsed_response.results
-                return SyncPager(has_next=_has_next, items=_items, get_next=_get_next,count=_parsed_response.count)
+
+                return SyncPager(
+                    has_next=_has_next, 
+                    items=_items, 
+                    get_next=_get_next,
+                )
+                
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
+        
         raise ApiError(status_code=_response.status_code, body=_response_json)
 
     def create(
