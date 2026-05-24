@@ -1,5 +1,5 @@
 """
-Fetches links to images that need their annotations validated
+Fetches links to images
 """
 
 import os
@@ -9,9 +9,7 @@ client = Vaapi(
     base_url=os.environ.get("VAT_API_URL"),
     api_key=os.environ.get("VAT_API_TOKEN"),
 )
-my_list = client.annotations.list(log=282, validated=True)
-if my_list:
-    print(my_list[0])
+my_list = client.image.list(log=282)
 
-print()
-print(len(my_list))
+for image in my_list:
+    print(image)
