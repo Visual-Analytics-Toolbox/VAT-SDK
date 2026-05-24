@@ -246,7 +246,7 @@ class MotionFrameClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "api/motionframe/update/",
+            "api/motionframe/bulk-update/",
             method="PATCH",
             json=data,
             request_options=request_options,
