@@ -7,13 +7,13 @@ name = "vaapi"
 authors = [
     { name = "NaoTH Berlin United", email = "nao-team@informatik.hu-berlin.de" },
 ]
-description = "Python utils for adding logs to our Visual Analytics Tool"
+description = "Python utils for working with logs indexed by the Berlin United Visual Analytics Tool"
 readme = "README.md"
-requires-python = ">=3.10.9"
-license = "Apache-2.0"
+requires-python = ">=3.12"
+license-files = ["LICENSE"]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 ]
 dynamic = ["version"]
 
