@@ -3,14 +3,14 @@ import typing
 
 from ..core.datetime_utils import serialize_datetime
 from ..core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
-
+from .cognition_frame import CognitionFrame
 
 class CognitionRepresentation(pydantic_v1.BaseModel):
     #: Id assigned by django
     id: typing.Optional[int] = None
 
     #: reference to a specific cognition frame
-    frame: typing.Optional[int] = pydantic_v1.Field(default=None)
+    frame: typing.Optional[CognitionFrame] = None 
 
     #: representation_data
     representation_data: typing.Optional[typing.Dict[str, typing.Any]] = (
@@ -52,12 +52,11 @@ class CognitionRepresentation(pydantic_v1.BaseModel):
         extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}
 
-class CognitionOffsetPagination(pydantic_v1.BaseModel):
+class CognitionPagination(pydantic_v1.BaseModel):
     """
-    Offset/limit paginated response for tasks
+    Cursor paginated response for tasks
     """
     results: typing.List[CognitionRepresentation]
-    count: int
     next: typing.Any
     previous: typing.Any
     
