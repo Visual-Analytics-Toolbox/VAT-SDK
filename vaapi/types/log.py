@@ -20,6 +20,7 @@ class Log(pydantic_v1.BaseModel):
 
     player_number: typing.Optional[int] = None
 
+    comment: typing.Optional[str] = None
 
     representation_list: typing.Optional[typing.Dict[str, typing.Any]] = (
         pydantic_v1.Field(default=None)
@@ -39,7 +40,6 @@ class Log(pydantic_v1.BaseModel):
 
     git_commit: typing.Optional[str] = pydantic_v1.Field(default=None)
 
-    is_favourite: typing.Optional[bool] = pydantic_v1.Field(default=None)
 
     @pydantic_v1.root_validator(pre=True)
     def handle_read_write_difference(cls, values):
