@@ -53,12 +53,11 @@ class MotionRepresentation(pydantic_v1.BaseModel):
         extra = pydantic_v1.Extra.allow
         json_encoders = {dt.datetime: serialize_datetime}
 
-class MotionOffsetPagination(pydantic_v1.BaseModel):
+class MotionPagination(pydantic_v1.BaseModel):
     """
-    Offset/limit paginated response for tasks
+    Cursor paginated response for tasks
     """
     results: typing.List[MotionRepresentation]
-    count: int
     next: typing.Any
     previous: typing.Any
     
