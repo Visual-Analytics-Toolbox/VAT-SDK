@@ -159,10 +159,9 @@ class CognitionRepresentationClient:
                     url_params = urllib.parse.parse_qs(parsed_url.query)
                     next_cursor = url_params.get('cursor', [None])[0]
 
-                # 4. Pass the cursor to the lambda instead of modifying the offset
                 _get_next = lambda: self.list(
                     limit=limit,
-                    cursor=next_cursor,  # Subsequest requests go blazing fast via cursor
+                    cursor=next_cursor,
                     request_options=request_options,
                     **filters
                 ) if _has_next else None
