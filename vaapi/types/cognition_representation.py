@@ -9,6 +9,8 @@ class CognitionRepresentation(pydantic_v1.BaseModel):
     #: Id assigned by django
     id: typing.Optional[int] = None
 
+    log: typing.Optional[int] = None
+
     #: reference to a specific cognition frame
     frame: typing.Optional[CognitionFrame] = None 
 

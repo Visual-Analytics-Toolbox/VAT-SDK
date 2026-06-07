@@ -77,6 +77,7 @@ class CognitionRepresentationClient:
         self,
         id: int,
         *,
+        log: typing.Optional[int] = OMIT,
         frame: typing.Optional[int] = OMIT,
         start_pos: typing.Optional[int] = OMIT,
         size: typing.Optional[int] = OMIT,
@@ -97,6 +98,7 @@ class CognitionRepresentationClient:
             f"api/cognition/{self.endpoint}/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
+                "log": log,
                 "frame": frame,
                 "start_pos": start_pos,
                 "size": size,

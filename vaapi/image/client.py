@@ -236,6 +236,7 @@ class ImageClient:
     def create(
         self,
         *,
+        log: typing.Optional[int] = OMIT,
         camera: typing.Optional[str] = OMIT,
         type: typing.Optional[str] = OMIT,
         frame: typing.Optional[int] = OMIT,
@@ -261,6 +262,7 @@ class ImageClient:
             "api/images/",
             method="POST",
             json={
+                "log": log,
                 "camera": camera,
                 "type": type,
                 "frame": frame,

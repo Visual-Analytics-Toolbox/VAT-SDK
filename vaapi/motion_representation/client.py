@@ -76,6 +76,7 @@ class MotionRepresentationClient:
         self,
         id: int,
         *,
+        log: typing.Optional[int] = OMIT,
         frame: typing.Optional[int] = OMIT,
         start_pos: typing.Optional[int] = OMIT,
         size: typing.Optional[int] = OMIT,
@@ -96,6 +97,7 @@ class MotionRepresentationClient:
             f"api/{self.endpoint}/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
+                "log": log,
                 "frame": frame,
                 "start_pos": start_pos,
                 "size": size,
@@ -177,6 +179,7 @@ class MotionRepresentationClient:
     def create(
         self,
         *,
+        log: typing.Optional[int] = OMIT,
         frame: typing.Optional[int] = OMIT,
         start_pos: typing.Optional[int] = OMIT,
         size: typing.Optional[int] = OMIT,
@@ -197,6 +200,7 @@ class MotionRepresentationClient:
             f"api/motion/{self.endpoint}/",
             method="POST",
             json={
+                "log": log,
                 "frame": frame,
                 "start_pos": start_pos,
                 "size": size,

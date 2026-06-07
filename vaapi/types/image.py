@@ -8,6 +8,8 @@ class Image(pydantic_v1.BaseModel):
     #: Id assigned by django
     id: typing.Optional[int] = None
 
+    log: typing.Optional[int] = None
+
     # 1. READ Field: The full object (what the server returns)
     # This should be the official field name in your model.
     frame: typing.Optional[CognitionFrame] = None 

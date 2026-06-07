@@ -1,16 +1,18 @@
+from ..core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
+from ..core.datetime_utils import serialize_datetime
+from .motion_frame import MotionFrame
 import datetime as dt
 import typing
-
-from ..core.datetime_utils import serialize_datetime
-from ..core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
 
 
 class MotionRepresentation(pydantic_v1.BaseModel):
     # Id assigned by django
     id: typing.Optional[int] = None
 
+    log: typing.Optional[int] = None
+
     # reference to a specific motion frame
-    frame: typing.Optional[int] = pydantic_v1.Field(default=None)
+    frame: typing.Optional[MotionFrame] = None 
 
     # start byte position in sensor.log for this instance of the representation
     start_pos: typing.Optional[int] = pydantic_v1.Field(default=None)
