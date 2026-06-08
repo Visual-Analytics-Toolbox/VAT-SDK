@@ -28,6 +28,7 @@ class ExperimentClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        my_experiment = client.experiment.get(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/experiments/{jsonable_encoder(id)}/",
@@ -55,6 +56,7 @@ class ExperimentClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.experiment.delete(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/experiments/{jsonable_encoder(id)}/",
@@ -90,6 +92,7 @@ class ExperimentClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.experiment.update(id=1, ...)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/experiments/{jsonable_encoder(id)}/",
@@ -127,6 +130,7 @@ class ExperimentClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.experiment.list(<filter here>)
         """
         query_params = {k: v for k, v in filters.items()}
         _response = self._client_wrapper.httpx_client.request(
@@ -165,6 +169,7 @@ class ExperimentClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.experiment.create(...)
         """
         _response = self._client_wrapper.httpx_client.request(
             "api/experiments/",

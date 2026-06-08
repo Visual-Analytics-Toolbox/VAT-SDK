@@ -29,6 +29,7 @@ class LogClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        my_log = client.logs.get(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/logs/{jsonable_encoder(id)}/",
@@ -56,6 +57,7 @@ class LogClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.logs.delete(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/logs/{jsonable_encoder(id)}/",
@@ -99,6 +101,7 @@ class LogClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.logs.update(id=1,...)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/logs/{jsonable_encoder(id)}/",
@@ -147,6 +150,7 @@ class LogClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.logs.get(<filter here>)
         """
         query_params = {k: v for k, v in filters.items() if v is not None}
         # if game_id:
@@ -199,6 +203,7 @@ class LogClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.logs.create(...)
         """
         _response = self._client_wrapper.httpx_client.request(
             "api/logs/",

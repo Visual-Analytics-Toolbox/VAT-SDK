@@ -28,6 +28,7 @@ class LogStatusClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        a = client.log_status.get(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/log-status/{jsonable_encoder(id)}/",
@@ -55,6 +56,7 @@ class LogStatusClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.log_status.delete(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/log-status/{jsonable_encoder(id)}/",
@@ -123,6 +125,7 @@ class LogStatusClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.log_status.update(id=1, ...)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/log-status/{jsonable_encoder(log)}/",
@@ -194,6 +197,7 @@ class LogStatusClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.log_status.list(<filter here>)
         """
         query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
@@ -269,6 +273,7 @@ class LogStatusClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.log_status.create()
         """
         _response = self._client_wrapper.httpx_client.request(
             "api/log-status/",

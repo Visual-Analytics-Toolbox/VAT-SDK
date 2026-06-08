@@ -29,9 +29,7 @@ class EventsClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
-        my_event = client.events.get(
-            id=1,
-        )
+        my_event = client.events.get(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/events/{jsonable_encoder(id)}/",
@@ -99,7 +97,7 @@ class EventsClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
-        client.event.update(id=1, comment="We had a lot of fun")
+        client.events.update(id=1, comment="We had a lot of fun")
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/events/{jsonable_encoder(id)}/",
@@ -138,7 +136,7 @@ class EventsClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
-        client.event.list()
+        client.events.list()
         """
         query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
@@ -177,7 +175,7 @@ class EventsClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
-        client.event.create(name="RoboCup 2026)
+        client.events.create(name="RoboCup 2026)
         """
         _response = self._client_wrapper.httpx_client.request(
             "api/events/",
@@ -219,8 +217,8 @@ class EventsClient:
             api_key="YOUR_API_KEY",
         )
 
-        client.event.bulk_create([
-            {name="RoboCup 2026},{name="RoboCup 2027}
+        client.events.bulk_create([
+            {name:"RoboCup 2026},{name:"RoboCup 2027}
             ])
         """
         _response = self._client_wrapper.httpx_client.request(

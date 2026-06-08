@@ -29,6 +29,7 @@ class GameClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        my_game = client.games.get(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/games/{jsonable_encoder(id)}/",
@@ -56,6 +57,7 @@ class GameClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.games.delete(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/games/{jsonable_encoder(id)}/",
@@ -98,6 +100,7 @@ class GameClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.games.update(id=1, is_testgame=True)
         """
         _response = self._client_wrapper.httpx_client.request(
             f"api/games/{jsonable_encoder(id)}/",
@@ -143,6 +146,7 @@ class GameClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.games.list()
         """
         query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
@@ -186,6 +190,7 @@ class GameClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.events.create(event=1, team1="Berlin United", team2="B-Human",is_testgame=True)
         """
         _response = self._client_wrapper.httpx_client.request(
             "api/games/",
@@ -231,6 +236,9 @@ class GameClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.games.bulk_create([
+            {event:1, half="half1"},{event:1, half="half2"}
+            ])
         """
         _response = self._client_wrapper.httpx_client.request(
             "api/games/",
