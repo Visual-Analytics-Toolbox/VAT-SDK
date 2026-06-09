@@ -77,7 +77,7 @@ class MotionFrameClient:
         self,
         id: int,
         *,
-        log_id: typing.Optional[int] = OMIT,
+        log: typing.Optional[int] = OMIT,
         frame_number: typing.Optional[int] = OMIT,
         frame_time: typing.Optional[int] = OMIT,
         closest_cognition_frame: typing.Optional[int] = OMIT,
@@ -97,7 +97,7 @@ class MotionFrameClient:
             f"api/motionframe/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
-                "log_id": log_id,
+                "log": log,
                 "frame_number": frame_number,
                 "frame_time": frame_time,
                 "closest_cognition_frame": closest_cognition_frame,
@@ -162,7 +162,7 @@ class MotionFrameClient:
     def create(
         self,
         *,
-        log_id: typing.Optional[int] = OMIT,
+        log: typing.Optional[int] = OMIT,
         frame_number: typing.Optional[int] = OMIT,
         frame_time: typing.Optional[int] = OMIT,
         closest_cognition_frame: typing.Optional[int] = OMIT,
@@ -182,7 +182,7 @@ class MotionFrameClient:
             "api/motionframe/",
             method="POST",
             json={
-                "log_id": log_id,
+                "log_id": log,
                 "frame_number": frame_number,
                 "frame_time": frame_time,
                 "closest_cognition_frame": closest_cognition_frame,

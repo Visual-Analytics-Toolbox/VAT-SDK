@@ -77,7 +77,7 @@ class CognitionFrameClient:
         self,
         id: int,
         *,
-        log_id: typing.Optional[int] = OMIT,
+        log: typing.Optional[int] = OMIT,
         frame_number: typing.Optional[int] = OMIT,
         frame_time: typing.Optional[int] = OMIT,
         closest_motion_frame: typing.Optional[int] = OMIT,
@@ -100,7 +100,7 @@ class CognitionFrameClient:
             f"api/cognitionframe/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
-                "log_id": log_id,
+                "log_id": log,
                 "frame_number": frame_number,
                 "frame_time": frame_time,
                 "closest_motion_frame": closest_motion_frame,
@@ -168,7 +168,7 @@ class CognitionFrameClient:
     def create(
         self,
         *,
-        log_id: typing.Optional[int] = OMIT,
+        log: typing.Optional[int] = OMIT,
         frame_number: typing.Optional[int] = OMIT,
         frame_time: typing.Optional[int] = OMIT,
         closest_motion_frame: typing.Optional[int] = OMIT,
@@ -191,7 +191,7 @@ class CognitionFrameClient:
             "api/cognitionframe/",
             method="POST",
             json={
-                "log_id": log_id,
+                "log": log,
                 "frame_number": frame_number,
                 "frame_time": frame_time,
                 "closest_motion_frame": closest_motion_frame,
