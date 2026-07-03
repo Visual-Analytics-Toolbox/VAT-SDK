@@ -1,0 +1,188 @@
+import typing
+from json.decoder import JSONDecodeError
+
+from ..core.api_error import ApiError
+from ..core.client_wrapper import SyncClientWrapper
+from ..core.jsonable_encoder import jsonable_encoder
+from ..core.pydantic_utilities import pydantic_v1
+from ..core.request_options import RequestOptions
+from ..types.log_first_frame import LogFirstFrame
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
+
+
+class LogFirstFrameClient:
+    def __init__(self, *, client_wrapper: SyncClientWrapper):
+        self._client_wrapper = client_wrapper
+
+    def get(
+        self, id: int, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> LogFirstFrame:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        a = client.log_status.get(id=1)
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"api/log-first-frame/{jsonable_encoder(id)}/",
+            method="GET",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return pydantic_v1.parse_obj_as(LogFirstFrame, _response.json())  # type: ignore
+            _response_json = _response.json()
+
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def delete(
+        self, id: int, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> None:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        client.log_status.delete(id=1)
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"api/log-first-frame/{jsonable_encoder(id)}/",
+            method="DELETE",
+            request_options=request_options,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def update(
+        self,
+        log: int,
+        *,
+        first_standby_frame: typing.Optional[int] = OMIT,
+        first_set_frame: typing.Optional[int] = OMIT,
+    first_ready_frame: typing.Optional[int] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> LogFirstFrame:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        client.log_status.update(id=1, ...)
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            f"api/log-first-frame/{jsonable_encoder(log)}/",
+            method="PATCH",
+            json={
+                "first_standby_frame": first_standby_frame,
+                "first_set_frame": first_set_frame,
+                "first_ready_frame": first_ready_frame,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return pydantic_v1.parse_obj_as(LogFirstFrame, _response.json())  # type: ignore
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def list(
+        self,
+        # log_id: int, *,
+        request_options: typing.Optional[RequestOptions] = None,
+        **filters: typing.Any,
+    ) -> typing.List[LogFirstFrame]:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        client.log_status.list(<filter here>)
+        """
+        query_params = {k: v for k, v in filters.items() if v is not None}
+        _response = self._client_wrapper.httpx_client.request(
+            "api/log-first-frame/",
+            method="GET",
+            request_options=request_options,
+            params=query_params,
+        )
+        # _response = self._client_wrapper.httpx_client.request(
+        #    f"api/cognitionrepr/?log={jsonable_encoder(log_id)}", method="GET", request_options=request_options
+        # )
+        try:
+            if 200 <= _response.status_code < 300:
+                return pydantic_v1.parse_obj_as(
+                    typing.List[LogFirstFrame], _response.json()
+                )  # type: ignore
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
+
+    def create(
+        self,
+        *,
+          log: int,
+        first_standby_frame: typing.Optional[int] = OMIT,
+        first_set_frame: typing.Optional[int] = OMIT,
+    first_ready_frame: typing.Optional[int] = OMIT,
+        request_options: typing.Optional[RequestOptions] = None,
+    ) -> LogFirstFrame:
+        """
+        Examples
+        --------
+        from vaapi.client import Vaapi
+
+        client = Vaapi(
+            base_url='https://vat.berlin-united.com/',
+            api_key="YOUR_API_KEY",
+        )
+        client.log_status.create()
+        """
+        _response = self._client_wrapper.httpx_client.request(
+            "api/log-first-frame/",
+            method="POST",
+            json={
+                "log": log,
+                 "first_standby_frame": first_standby_frame,
+                "first_set_frame": first_set_frame,
+                "first_ready_frame": first_ready_frame,
+            },
+            request_options=request_options,
+            omit=OMIT,
+        )
+        try:
+            if 200 <= _response.status_code < 300:
+                return pydantic_v1.parse_obj_as(LogFirstFrame, _response.json())  # type: ignore
+            _response_json = _response.json()
+        except JSONDecodeError:
+            raise ApiError(status_code=_response.status_code, body=_response.text)
+        raise ApiError(status_code=_response.status_code, body=_response_json)
