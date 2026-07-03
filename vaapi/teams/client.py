@@ -73,6 +73,7 @@ class TeamClient:
         self,
         id: int,
         *,
+        event: typing.Optional[int] = OMIT,
         team_id: typing.Optional[int] = OMIT,
         name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -91,6 +92,7 @@ class TeamClient:
             f"api/teams/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
+                "event":event,
                 "team_id": team_id,
                 "name": name,
             },
@@ -139,6 +141,7 @@ class TeamClient:
     def create(
         self,
         *,
+        event: typing.Optional[int] = OMIT,
         team_id: typing.Optional[int] = OMIT,
         name: typing.Optional[str] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
@@ -157,6 +160,7 @@ class TeamClient:
             "api/teams/",
             method="POST",
             json={
+                "event":event,
                 "team_id": team_id,
                 "name": name,
             },

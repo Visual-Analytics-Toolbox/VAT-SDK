@@ -10,6 +10,8 @@ from ..core.pydantic_utilities import deep_union_pydantic_dicts, pydantic_v1
 class Team(pydantic_v1.BaseModel):
     # Id assigned by django
     id: typing.Optional[int] = None
+    
+    event: typing.Optional[int] = None
 
     team_id: typing.Optional[int] = None
 
