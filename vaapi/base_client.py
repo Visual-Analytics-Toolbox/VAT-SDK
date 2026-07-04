@@ -23,6 +23,8 @@ from .videos.client import VideoClient
 from .teams.client import TeamClient
 from .robots.client import RobotClient
 from .timeline.client import TimelineClient
+from .raw_gc_situation.client import RawGCSituationClient
+from .log_first_frame.client import LogFirstFrameClient
 
 cognition_representation_list = [
     "AudioData",
@@ -149,6 +151,8 @@ class VaapiBase:
         self.team = TeamClient(client_wrapper=self._client_wrapper)
         self.robot = RobotClient(client_wrapper=self._client_wrapper)
         self.timeline = TimelineClient(client_wrapper=self._client_wrapper)
+        self.raw_gc_situation = RawGCSituationClient(client_wrapper=self._client_wrapper)
+        self.log_first_frame = LogFirstFrameClient(client_wrapper=self._client_wrapper)
 
         # dynamically create client members
         for attr_name in cognition_representation_list:

@@ -6,19 +6,19 @@ from ..core.client_wrapper import SyncClientWrapper
 from ..core.jsonable_encoder import jsonable_encoder
 from ..core.pydantic_utilities import pydantic_v1
 from ..core.request_options import RequestOptions
-from ..types.teams import Team
+from ..types.log_first_frame import LogFirstFrame
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
 
 
-class TeamClient:
+class LogFirstFrameClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
     def get(
         self, id: int, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> Team:
+    ) -> LogFirstFrame:
         """
         Examples
         --------
@@ -28,15 +28,16 @@ class TeamClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        a = client.log_status.get(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/teams/{jsonable_encoder(id)}/",
+            f"api/log-first-frame/{jsonable_encoder(id)}/",
             method="GET",
             request_options=request_options,
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(Team, _response.json())  # type: ignore
+                return pydantic_v1.parse_obj_as(LogFirstFrame, _response.json())  # type: ignore
             _response_json = _response.json()
 
         except JSONDecodeError:
@@ -55,9 +56,10 @@ class TeamClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.log_status.delete(id=1)
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/teams/{jsonable_encoder(id)}/",
+            f"api/log-first-frame/{jsonable_encoder(id)}/",
             method="DELETE",
             request_options=request_options,
         )
@@ -71,13 +73,13 @@ class TeamClient:
 
     def update(
         self,
-        id: int,
+        log: int,
         *,
-        event: typing.Optional[int] = OMIT,
-        team_id: typing.Optional[int] = OMIT,
-        name: typing.Optional[str] = OMIT,
+        first_standby_frame: typing.Optional[int] = OMIT,
+        first_set_frame: typing.Optional[int] = OMIT,
+    first_ready_frame: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> Team:
+    ) -> LogFirstFrame:
         """
         Examples
         --------
@@ -87,21 +89,22 @@ class TeamClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.log_status.update(id=1, ...)
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/teams/{jsonable_encoder(id)}/",
+            f"api/log-first-frame/{jsonable_encoder(log)}/",
             method="PATCH",
             json={
-                "event":event,
-                "team_id": team_id,
-                "name": name,
+                "first_standby_frame": first_standby_frame,
+                "first_set_frame": first_set_frame,
+                "first_ready_frame": first_ready_frame,
             },
             request_options=request_options,
             omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(Team, _response.json())  # type: ignore
+                return pydantic_v1.parse_obj_as(LogFirstFrame, _response.json())  # type: ignore
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -109,10 +112,10 @@ class TeamClient:
 
     def list(
         self,
-        *,
+        # log_id: int, *,
         request_options: typing.Optional[RequestOptions] = None,
         **filters: typing.Any,
-    ) -> typing.List[Team]:
+    ) -> typing.List[LogFirstFrame]:
         """
         Examples
         --------
@@ -122,17 +125,23 @@ class TeamClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.log_status.list(<filter here>)
         """
         query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
-            "api/teams/",
+            "api/log-first-frame/",
             method="GET",
             request_options=request_options,
             params=query_params,
         )
+        # _response = self._client_wrapper.httpx_client.request(
+        #    f"api/cognitionrepr/?log={jsonable_encoder(log_id)}", method="GET", request_options=request_options
+        # )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(typing.List[Team], _response.json())  # type: ignore
+                return pydantic_v1.parse_obj_as(
+                    typing.List[LogFirstFrame], _response.json()
+                )  # type: ignore
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
@@ -141,11 +150,12 @@ class TeamClient:
     def create(
         self,
         *,
-        event: typing.Optional[int] = OMIT,
-        team_id: typing.Optional[int] = OMIT,
-        name: typing.Optional[str] = OMIT,
+          log: int,
+        first_standby_frame: typing.Optional[int] = OMIT,
+        first_set_frame: typing.Optional[int] = OMIT,
+    first_ready_frame: typing.Optional[int] = OMIT,
         request_options: typing.Optional[RequestOptions] = None,
-    ) -> Team:
+    ) -> LogFirstFrame:
         """
         Examples
         --------
@@ -155,21 +165,23 @@ class TeamClient:
             base_url='https://vat.berlin-united.com/',
             api_key="YOUR_API_KEY",
         )
+        client.log_status.create()
         """
         _response = self._client_wrapper.httpx_client.request(
-            "api/teams/",
+            "api/log-first-frame/",
             method="POST",
             json={
-                "event":event,
-                "team_id": team_id,
-                "name": name,
+                "log": log,
+                 "first_standby_frame": first_standby_frame,
+                "first_set_frame": first_set_frame,
+                "first_ready_frame": first_ready_frame,
             },
             request_options=request_options,
             omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
-                return pydantic_v1.parse_obj_as(Team, _response.json())  # type: ignore
+                return pydantic_v1.parse_obj_as(LogFirstFrame, _response.json())  # type: ignore
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, body=_response.text)
