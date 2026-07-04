@@ -261,7 +261,7 @@ class CognitionFrameClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            "api/cognitionframe/update/",
+            "api/cognitionframe/bulk-update/",
             method="PATCH",
             json=data,
             request_options=request_options,

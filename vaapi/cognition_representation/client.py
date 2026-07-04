@@ -32,7 +32,7 @@ class CognitionRepresentationClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/cognition/{self.endpoint}/{jsonable_encoder(id)}/",
+            f"api/{self.endpoint}/{jsonable_encoder(id)}/",
             method="GET",
             request_options=request_options,
         )
@@ -61,7 +61,7 @@ class CognitionRepresentationClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/cognition/{self.endpoint}/{jsonable_encoder(id)}/",
+            f"api/{self.endpoint}/{jsonable_encoder(id)}/",
             method="DELETE",
             request_options=request_options,
         )
@@ -95,7 +95,7 @@ class CognitionRepresentationClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/cognition/{self.endpoint}/{jsonable_encoder(id)}/",
+            f"api/{self.endpoint}/{jsonable_encoder(id)}/",
             method="PATCH",
             json={
                 "log": log,
@@ -144,7 +144,7 @@ class CognitionRepresentationClient:
             query_params['cursor'] = cursor
 
         _response = self._client_wrapper.httpx_client.request(
-            f"api/cognition/{self.endpoint}/",
+            f"api/{self.endpoint}/",
             method="GET",
             request_options=request_options,
             params=query_params,
@@ -200,7 +200,7 @@ class CognitionRepresentationClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/cognition/{self.endpoint}/",
+            f"api/{self.endpoint}/",
             method="POST",
             json={
                 "frame": frame,
@@ -238,7 +238,7 @@ class CognitionRepresentationClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/cognition/{self.endpoint}/",
+            f"api/{self.endpoint}/",
             method="POST",
             json=repr_list,
             request_options=request_options,
@@ -269,7 +269,7 @@ class CognitionRepresentationClient:
         """
         query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
-            f"api/cognition/{self.endpoint}/count/",
+            f"api/{self.endpoint}/count/",
             method="GET",
             request_options=request_options,
             params=query_params,
@@ -312,7 +312,7 @@ class CognitionRepresentationClient:
             payload = OMIT
 
         _response = self._client_wrapper.httpx_client.request(
-            f"api/cognition/{self.endpoint}/bulk-update/",
+            f"api/{self.endpoint}/bulk-update/",
             method="PATCH",
             json=payload,
             request_options=request_options,

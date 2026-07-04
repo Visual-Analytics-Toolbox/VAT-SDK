@@ -33,7 +33,7 @@ class MotionRepresentationClient:
         """
         # FIXME make this dynamic
         _response = self._client_wrapper.httpx_client.request(
-            f"api/motion/{self.endpoint}/{jsonable_encoder(id)}/",
+            f"api/{self.endpoint}/{jsonable_encoder(id)}/",
             method="GET",
             request_options=request_options,
         )
@@ -60,7 +60,7 @@ class MotionRepresentationClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/motion/{self.endpoint}/{jsonable_encoder(id)}/",
+            f"api/{self.endpoint}/{jsonable_encoder(id)}/",
             method="DELETE",
             request_options=request_options,
         )
@@ -141,7 +141,7 @@ class MotionRepresentationClient:
             query_params['cursor'] = cursor
 
         _response = self._client_wrapper.httpx_client.request(
-            f"api/motion/{self.endpoint}/",
+            f"api/{self.endpoint}/",
             method="GET",
             request_options=request_options,
             params=query_params,
@@ -197,7 +197,7 @@ class MotionRepresentationClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/motion/{self.endpoint}/",
+            f"api/{self.endpoint}/",
             method="POST",
             json={
                 "log": log,
@@ -234,7 +234,7 @@ class MotionRepresentationClient:
         )
         """
         _response = self._client_wrapper.httpx_client.request(
-            f"api/motion/{self.endpoint}/",
+            f"api/{self.endpoint}/",
             method="POST",
             json=repr_list,
             request_options=request_options,
@@ -265,7 +265,7 @@ class MotionRepresentationClient:
         """
         query_params = {k: v for k, v in filters.items() if v is not None}
         _response = self._client_wrapper.httpx_client.request(
-            f"api/motion/{self.endpoint}/count",
+            f"api/{self.endpoint}/count",
             method="GET",
             request_options=request_options,
             params=query_params,
@@ -308,7 +308,7 @@ class MotionRepresentationClient:
             payload = OMIT
 
         _response = self._client_wrapper.httpx_client.request(
-            f"api/motion/{self.endpoint}/bulk-update/",
+            f"api/{self.endpoint}/bulk-update/",
             method="PATCH",
             json=payload,
             request_options=request_options,
